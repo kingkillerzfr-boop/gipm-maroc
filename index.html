@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>G.I.P.M. – Global Industrie &amp; Packaging Maroc</title>
+  <style>
+    :root {
+      --navy: #18426B;
+      --navy-dark: #102E4B;
+      --orange: #EB7B2D;
+      --orange-dark: #CF6419;
+      --bg: #F4F6F9;
+      --card: #FFFFFF;
+      --text: #1E293B;
+      --muted: #64748B;
+      --border: #E2E8F0;
+      --radius: 12px;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: Arial, Helvetica, sans-serif; background: var(--bg); color: var(--text); line-height: 1.5; }
+    header { background: #fff; border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 20; }
+    .nav-wrap { max-width: 1160px; margin: 0 auto; padding: 12px 20px; display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+    .brand { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--navy); font-weight: 800; }
+    .brand img { width: 48px; height: 48px; object-fit: contain; border-radius: 6px; }
+    .nav-btns { display: flex; gap: 10px; }
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 6px; padding: 9px 15px; border-radius: 8px; border: none; font-weight: 700; font-size: 0.9rem; cursor: pointer; text-decoration: none; }
+    .btn-orange { background: var(--orange); color: #fff; }
+    .btn-orange:hover { background: var(--orange-dark); }
+    .btn-navy { background: var(--navy); color: #fff; }
+    .btn-outline { background: #fff; color: var(--navy); border: 1.5px solid var(--navy); }
+    .btn-green { background: #16A34A; color: #fff; }
+    .hero { background: linear-gradient(135deg, var(--navy), var(--navy-dark)); color: #fff; padding: 42px 20px; }
+    .hero-inner { max-width: 1160px; margin: 0 auto; }
+    .hero h1 { font-size: 2rem; margin-bottom: 12px; }
+    .hero h1 span { color: #FFA05C; }
+    .hero p { max-width: 650px; color: #E2E8F0; margin-bottom: 20px; }
+    main { max-width: 1160px; margin: 0 auto; padding: 32px 20px 60px; }
+    .top-bar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 22px; }
+    .top-bar h2 { color: var(--navy); font-size: 1.5rem; }
+    .tabs { display: flex; flex-wrap: wrap; gap: 8px; }
+    .tab { padding: 7px 14px; border-radius: 999px; border: 1px solid var(--border); background: #fff; color: var(--text); font-weight: 700; font-size: 0.85rem; cursor: pointer; }
+    .tab.active { background: var(--navy); color: #fff; border-color: var(--navy); }
+    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(245px, 1fr)); gap: 18px; }
+    .card { background: #fff; border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; display: flex; flex-direction: column; justify-content: space-between; }
+    .pic-box { height: 180px; background: #fff; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: center; padding: 12px; }
+    .pic-box img { max-width: 100%; max-height: 100%; object-fit: contain; }
+    .card-body { padding: 14px; display: flex; flex-direction: column; gap: 6px; flex: 1; }
+    .cat { font-size: 0.75rem; font-weight: 700; color: var(--orange-dark); text-transform: uppercase; }
+    .card-title { font-size: 1rem; font-weight: 700; color: var(--navy); }
+    .card-desc { font-size: 0.86rem; color: var(--muted); flex: 1; }
+    .card-foot { padding: 0 14px 14px; }
+    .card-foot .btn { width: 100%; }
+    .modal-bg { position: fixed; inset: 0; background: rgba(0,0,0,0.55); display: none; justify-content: flex-end; z-index: 50; }
+    .modal-bg.show { display: flex; }
+    .modal-panel { width: 100%; max-width: 430px; height: 100%; background: #fff; padding: 20px; overflow-y: auto; display: flex; flex-direction: column; gap: 14px; }
+    .modal-head { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border); padding-bottom: 10px; }
+    .x-btn { width: 32px; height: 32px; border-radius: 6px; border: none; background: #F1F5F9; font-weight: 700; cursor: pointer; }
+    .item-row { display: flex; justify-content: space-between; align-items: center; gap: 8px; border: 1px solid var(--border); border-radius: 8px; padding: 8px 10px; font-size: 0.88rem; }
+    .qty { display: flex; align-items: center; gap: 6px; }
+    .qty button { width: 24px; height: 24px; border: 1px solid var(--border); background: #F8FAFC; cursor: pointer; font-weight: 700; }
+    .field { display: flex; flex-direction: column; gap: 4px; }
+    .field label { font-size: 0.84rem; font-weight: 700; color: var(--navy); }
+    .field input, .field textarea { padding: 8px 10px; border: 1px solid var(--border); border-radius: 8px; font-family: inherit; font-size: 0.9rem; }
+    .msg { font-size: 0.84rem; color: #15803D; font-weight: 700; min-height: 18px; }
+    footer { background: var(--navy-dark); color: #CBD5E1; text-align: center; padding: 24px 16px; font-size: 0.88rem; }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="nav-wrap">
+      <a class="brand" href="#">
+        <img id="siteLogo" src="logo.png" alt="Logo G.I.P.M." />
+        <span>G.I.P.M. – Global Industrie &amp; Packaging Maroc</span>
+      </a>
+      <div class="nav-btns">
+        <a class="btn btn-outline" href="#catalogue">Catalogue</a>
+        <button class="btn btn-orange" id="btnOpenQuote" type="button">Devis (<span id="badgeCount">0</span>)</button>
+      </div>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="hero-inner">
+      <h1>Emballage &amp; <span>Packaging Industriel</span> au Maroc</h1>
+      <p>Cartons, films étirables, films à bulles, feuillards, housses thermiques et palettes pour vos besoins professionnels.</p>
+      <div style="display:flex;flex-wrap:wrap;gap:10px;">
+        <a class="btn btn-orange" href="#catalogue">Voir les produits</a>
+        <button class="btn btn-green" id="btnDirectWa" type="button">Devis rapide WhatsApp</button>
+      </div>
+    </div>
+  </section>
+
+  <main id="catalogue">
+    <div class="top-bar">
+      <h2>Nos Produits Packaging</h2>
+      <div class="tabs" id="tabBar">
+        <button class="tab active" data-cat="all" type="button">Tous</button>
+        <button class="tab" data-cat="Cartons" type="button">Cartons</button>
+        <button class="tab" data-cat="Films &amp; Protection" type="button">Films &amp; Protection</button>
+        <button class="tab" data-cat="Cerclage &amp; Adhésifs" type="button">Cerclage &amp; Adhésifs</button>
+        <button class="tab" data-cat="Palettes" type="button">Palettes</button>
+      </div>
+    </div>
+    <div class="grid" id="grid"></div>
+  </main>
+
+  <div class="modal-bg" id="modalBg">
+    <div class="modal-panel">
+      <div class="modal-head">
+        <h3>Demande de devis</h3>
+        <button class="x-btn" id="btnCloseQuote" type="button">✕</button>
+      </div>
+      <div id="quoteList"></div>
+      <div class="field">
+        <label for="inpCompany">Entreprise / Nom</label>
+        <input id="inpCompany" type="text" placeholder="Ex. Société Atlas" />
+      </div>
+      <div class="field">
+        <label for="inpMeasures">Mesures / Dimensions souhaitées (optionnel)</label>
+        <input id="inpMeasures" type="text" placeholder="Ex. 60x40x40 cm, 23 microns, palette 80x120..." />
+      </div>
+      <div class="field">
+        <label for="inpNotes">Précisions / Ville (optionnel)</label>
+        <textarea id="inpNotes" rows="2" placeholder="Quantités, lieu de livraison..."></textarea>
+      </div>
+      <button class="btn btn-green" id="btnSendWa" type="button">Envoyer sur WhatsApp</button>
+      <button class="btn btn-orange" id="btnSendMail" type="button">Envoyer par E-mail</button>
+      <button class="btn btn-outline" id="btnCopy" type="button">Copier le texte</button>
+      <div class="msg" id="msgBox"></div>
+    </div>
+  </div>
+
+  <footer>
+    G.I.P.M. – Global Industrie &amp; Packaging Maroc · Tél / WhatsApp : 07 30 65 90 63 · contact.gipm.maroc@gmail.com
+  </footer>
+
+  <script>
+    const WA_PHONE = "212730659063";
+    const EMAIL_TO = "contact.gipm.maroc@gmail.com";
+
+    const ITEMS = [
+      { id: "caisse", name: "Caisse américaine en carton", cat: "Cartons", img: "caisse-carton.jpg", desc: "Caisse en carton ondulé pour conditionnement et expédition." },
+      { id: "double", name: "Grand carton double cannelure", cat: "Cartons", img: "carton-double.jpg", desc: "Carton renforcé pour charges lourdes et transport." },
+      { id: "corniere", name: "Cornières de protection en carton", cat: "Cartons", img: "cornieres-carton.png", desc: "Protection des angles de palettes et colis." },
+      { id: "etirable", name: "Film étirable industriel", cat: "Films & Protection", img: "film-etirable.jpg", desc: "Maintien et stabilisation des palettes." },
+      { id: "bulle", name: "Rouleau de film à bulles", cat: "Films & Protection", img: "film-bulle.jpg", desc: "Protection antichoc pour articles fragiles." },
+      { id: "housse", name: "Housse thermique palette", cat: "Films & Protection", img: "housse-thermique.jpg", desc: "Protection contre variations thermiques et poussière." },
+      { id: "feuillard", name: "Feuillard PET vert de cerclage", cat: "Cerclage & Adhésifs", img: "feuillard-pet.jpeg", desc: "Cerclage résistant pour charges et palettes." },
+      { id: "adhesif", name: "Ruban adhésif d'emballage", cat: "Cerclage & Adhésifs", img: "ruban-adhesif.png", desc: "Fermeture fiable des cartons." },
+      { id: "euro", name: "Palette bois type Europe", cat: "Palettes", img: "palette-euro.png", desc: "Palette bois pour stockage et manutention." },
+      { id: "plastique", name: "Palette plastique industrielle", cat: "Palettes", img: "palette-plastique.png", desc: "Palette plastique légère et résistante." }
+    ];
+
+    const fallbackSvg = "data:image/svg+xml;utf8," + encodeURIComponent(
+      '<svg xmlns="http://www.w3.org/2000/svg" width="220" height="140" viewBox="0 0 220 140"><rect width="220" height="140" fill="#EEF2F6"/><rect x="75" y="30" width="70" height="70" rx="10" fill="#18426B"/><polygon points="110,30 145,48 110,66 75,48" fill="#EB7B2D"/><text x="110" y="122" font-family="Arial" font-size="13" font-weight="bold" fill="#18426B" text-anchor="middle">G.I.P.M. PACKAGING</text></svg>'
+    );
+
+    const logoEl = document.getElementById("siteLogo");
+    logoEl.addEventListener("error", function () {
+      if (this.dataset.done) return;
+      this.dataset.done = "1";
+      this.src = fallbackSvg;
+    });
+
+    let currentCat = "all";
+    const cart = {};
+
+    function drawGrid() {
+      const list = currentCat === "all" ? ITEMS : ITEMS.filter(function (i) { return i.cat === currentCat; });
+      const grid = document.getElementById("grid");
+      grid.innerHTML = "";
+
+      list.forEach(function (item) {
+        const card = document.createElement("div");
+        card.className = "card";
+
+        const picBox = document.createElement("div");
+        picBox.className = "pic-box";
+        const img = document.createElement("img");
+        img.src = item.img;
+        img.alt = item.name;
+        img.addEventListener("error", function () {
+          if (this.dataset.done) return;
+          this.dataset.done = "1";
+          this.src = fallbackSvg;
+        });
+        picBox.appendChild(img);
+
+        const body = document.createElement("div");
+        body.className = "card-body";
+        body.innerHTML = '<div class="cat">' + item.cat + '</div><div class="card-title">' + item.name + '</div><div class="card-desc">' + item.desc + '</div>';
+
+        const foot = document.createElement("div");
+        foot.className = "card-foot";
+        const addBtn = document.createElement("button");
+        addBtn.className = "btn btn-orange";
+        addBtn.type = "button";
+        addBtn.textContent = "Ajouter au devis";
+        addBtn.addEventListener("click", function () {
+          cart[item.id] = (cart[item.id] || 0) + 1;
+          refreshCart();
+          openModal();
+        });
+        foot.appendChild(addBtn);
+
+        card.appendChild(picBox);
+        card.appendChild(body);
+        card.appendChild(foot);
+        grid.appendChild(card);
+      });
+    }
+
+    function changeCount(id, diff) {
+      const next = (cart[id] || 0) + diff;
+      if (next <= 0) delete cart[id];
+      else cart[id] = next;
+      refreshCart();
+    }
+
+    function refreshCart() {
+      const entries = Object.entries(cart);
+      const total = entries.reduce(function (sum, pair) { return sum + pair[1]; }, 0);
+      document.getElementById("badgeCount").textContent = total;
+
+      const listEl = document.getElementById("quoteList");
+      if (!entries.length) {
+        listEl.innerHTML = '<p style="color:#64748B;font-size:0.88rem;">Aucun produit ajouté.</p>';
+        return;
+      }
+
+      listEl.innerHTML = "";
+      entries.forEach(function (pair) {
+        const id = pair[0];
+        const qty = pair[1];
+        const prod = ITEMS.find(function (x) { return x.id === id; });
+        if (!prod) return;
+
+        const row = document.createElement("div");
+        row.className = "item-row";
+
+        const info = document.createElement("div");
+        info.innerHTML = "<strong>" + prod.name + "</strong>";
+
+        const qtyBox = document.createElement("div");
+        qtyBox.className = "qty";
+
+        const minus = document.createElement("button");
+        minus.type = "button";
+        minus.textContent = "−";
+        minus.addEventListener("click", function () { changeCount(id, -1); });
+
+        const num = document.createElement("span");
+        num.textContent = qty;
+
+        const plus = document.createElement("button");
+        plus.type = "button";
+        plus.textContent = "+";
+        plus.addEventListener("click", function () { changeCount(id, 1); });
+
+        qtyBox.appendChild(minus);
+        qtyBox.appendChild(num);
+        qtyBox.appendChild(plus);
+        row.appendChild(info);
+        row.appendChild(qtyBox);
+        listEl.appendChild(row);
+      });
+    }
+
+    function makeMessage() {
+      const company = document.getElementById("inpCompany").value.trim();
+      const measures = document.getElementById("inpMeasures").value.trim();
+      const notes = document.getElementById("inpNotes").value.trim();
+      const lines = ["Bonjour G.I.P.M., je souhaite un devis packaging :"];
+
+      if (company) lines.push("• Entreprise / Nom : " + company);
+
+      const entries = Object.entries(cart);
+      if (entries.length) {
+        lines.push("• Produits :");
+        entries.forEach(function (pair) {
+          const prod = ITEMS.find(function (x) { return x.id === pair[0]; });
+          if (prod) lines.push("  - " + prod.name + " (x" + pair[1] + ")");
+        });
+      }
+
+      if (measures) lines.push("• Mesures / Dimensions : " + measures);
+      if (notes) lines.push("• Notes / Ville : " + notes);
+      return lines.join("\n");
+    }
+
+    function openModal() {
+      document.getElementById("msgBox").textContent = "";
+      document.getElementById("modalBg").classList.add("show");
+    }
+
+    function closeModal() {
+      document.getElementById("modalBg").classList.remove("show");
+    }
+
+    document.querySelectorAll("#tabBar .tab").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        document.querySelectorAll("#tabBar .tab").forEach(function (b) { b.classList.remove("active"); });
+        btn.classList.add("active");
+        currentCat = btn.getAttribute("data-cat");
+        drawGrid();
+      });
+    });
+
+    document.getElementById("btnOpenQuote").addEventListener("click", function () {
+      refreshCart();
+      openModal();
+    });
+    document.getElementById("btnCloseQuote").addEventListener("click", closeModal);
+    document.getElementById("modalBg").addEventListener("click", function (e) {
+      if (e.target === this) closeModal();
+    });
+
+    document.getElementById("btnDirectWa").addEventListener("click", function () {
+      window.open("https://wa.me/" + WA_PHONE + "?text=" + encodeURIComponent("Bonjour G.I.P.M., je souhaite un devis packaging."), "_blank");
+    });
+
+    document.getElementById("btnSendWa").addEventListener("click", function () {
+      window.open("https://wa.me/" + WA_PHONE + "?text=" + encodeURIComponent(makeMessage()), "_blank");
+    });
+
+    document.getElementById("btnSendMail").addEventListener("click", function () {
+      window.location.href = "mailto:" + EMAIL_TO + "?subject=" + encodeURIComponent("Demande de devis – G.I.P.M.") + "&body=" + encodeURIComponent(makeMessage());
+    });
+
+    document.getElementById("btnCopy").addEventListener("click", function () {
+      const text = makeMessage();
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(function () {
+          document.getElementById("msgBox").textContent = "Texte copié !";
+        }).catch(function () {
+          document.getElementById("msgBox").textContent = "Copie impossible, sélectionnez le texte.";
+        });
+      }
+    });
+
+    drawGrid();
+    refreshCart();
+  </script>
+</body>
+</html>
