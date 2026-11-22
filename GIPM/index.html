@@ -3,344 +3,1389 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>G.I.P.M. – Global Industrie &amp; Packaging Maroc</title>
+  <title>G.I.P.M. – Global Industrie &amp; Packaging Maroc | Solutions B2B</title>
+  <link id="pageFavicon" rel="icon" type="image/png" href="logo.png" />
   <style>
     :root {
       --navy: #18426B;
-      --navy-dark: #102E4B;
+      --navy-deep: #0D243C;
+      --navy-mid: #1E5284;
       --orange: #EB7B2D;
-      --orange-dark: #CF6419;
-      --bg: #F4F6F9;
-      --card: #FFFFFF;
-      --text: #1E293B;
-      --muted: #64748B;
-      --border: #E2E8F0;
-      --radius: 12px;
+      --orange-hover: #D4661B;
+      --orange-soft: rgba(235, 123, 45, 0.12);
+      --bg: #F1F5F9;
+      --surface: #FFFFFF;
+      --ink: #0F172A;
+      --muted: #475569;
+      --line: #E2E8F0;
+      --radius-lg: 18px;
+      --radius-md: 12px;
+      --radius-sm: 8px;
+      --shadow-sm: 0 4px 14px rgba(13, 36, 60, 0.05);
+      --shadow-md: 0 14px 34px rgba(13, 36, 60, 0.12);
     }
+
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: Arial, Helvetica, sans-serif; background: var(--bg); color: var(--text); line-height: 1.5; }
-    header { background: #fff; border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 20; }
-    .nav-wrap { max-width: 1160px; margin: 0 auto; padding: 12px 20px; display: flex; align-items: center; justify-content: space-between; gap: 12px; }
-    .brand { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--navy); font-weight: 800; }
-    .brand img { width: 48px; height: 48px; object-fit: contain; border-radius: 6px; }
-    .nav-btns { display: flex; gap: 10px; }
-    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 6px; padding: 9px 15px; border-radius: 8px; border: none; font-weight: 700; font-size: 0.9rem; cursor: pointer; text-decoration: none; }
-    .btn-orange { background: var(--orange); color: #fff; }
-    .btn-orange:hover { background: var(--orange-dark); }
-    .btn-navy { background: var(--navy); color: #fff; }
-    .btn-outline { background: #fff; color: var(--navy); border: 1.5px solid var(--navy); }
-    .btn-green { background: #16A34A; color: #fff; }
-    .hero { background: linear-gradient(135deg, var(--navy), var(--navy-dark)); color: #fff; padding: 42px 20px; }
-    .hero-inner { max-width: 1160px; margin: 0 auto; }
-    .hero h1 { font-size: 2rem; margin-bottom: 12px; }
-    .hero h1 span { color: #FFA05C; }
-    .hero p { max-width: 650px; color: #E2E8F0; margin-bottom: 20px; }
-    main { max-width: 1160px; margin: 0 auto; padding: 32px 20px 60px; }
-    .top-bar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 22px; }
-    .top-bar h2 { color: var(--navy); font-size: 1.5rem; }
-    .tabs { display: flex; flex-wrap: wrap; gap: 8px; }
-    .tab { padding: 7px 14px; border-radius: 999px; border: 1px solid var(--border); background: #fff; color: var(--text); font-weight: 700; font-size: 0.85rem; cursor: pointer; }
-    .tab.active { background: var(--navy); color: #fff; border-color: var(--navy); }
-    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(245px, 1fr)); gap: 18px; }
-    .card { background: #fff; border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; display: flex; flex-direction: column; justify-content: space-between; }
-    .pic-box { height: 180px; background: #fff; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: center; padding: 12px; }
-    .pic-box img { max-width: 100%; max-height: 100%; object-fit: contain; }
-    .card-body { padding: 14px; display: flex; flex-direction: column; gap: 6px; flex: 1; }
-    .cat { font-size: 0.75rem; font-weight: 700; color: var(--orange-dark); text-transform: uppercase; }
-    .card-title { font-size: 1rem; font-weight: 700; color: var(--navy); }
-    .card-desc { font-size: 0.86rem; color: var(--muted); flex: 1; }
-    .card-foot { padding: 0 14px 14px; }
-    .card-foot .btn { width: 100%; }
-    .modal-bg { position: fixed; inset: 0; background: rgba(0,0,0,0.55); display: none; justify-content: flex-end; z-index: 50; }
-    .modal-bg.show { display: flex; }
-    .modal-panel { width: 100%; max-width: 430px; height: 100%; background: #fff; padding: 20px; overflow-y: auto; display: flex; flex-direction: column; gap: 14px; }
-    .modal-head { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border); padding-bottom: 10px; }
-    .x-btn { width: 32px; height: 32px; border-radius: 6px; border: none; background: #F1F5F9; font-weight: 700; cursor: pointer; }
-    .item-row { display: flex; justify-content: space-between; align-items: center; gap: 8px; border: 1px solid var(--border); border-radius: 8px; padding: 8px 10px; font-size: 0.88rem; }
-    .qty { display: flex; align-items: center; gap: 6px; }
-    .qty button { width: 24px; height: 24px; border: 1px solid var(--border); background: #F8FAFC; cursor: pointer; font-weight: 700; }
-    .field { display: flex; flex-direction: column; gap: 4px; }
-    .field label { font-size: 0.84rem; font-weight: 700; color: var(--navy); }
-    .field input, .field textarea { padding: 8px 10px; border: 1px solid var(--border); border-radius: 8px; font-family: inherit; font-size: 0.9rem; }
-    .msg { font-size: 0.84rem; color: #15803D; font-weight: 700; min-height: 18px; }
-    footer { background: var(--navy-dark); color: #CBD5E1; text-align: center; padding: 24px 16px; font-size: 0.88rem; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, Helvetica, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      line-height: 1.58;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .container {
+      max-width: 1220px;
+      margin: 0 auto;
+      padding: 0 22px;
+    }
+
+    /* Top utility bar */
+    .topbar {
+      background: var(--navy-deep);
+      color: #CBD5E1;
+      font-size: 0.82rem;
+      padding: 8px 0;
+    }
+
+    .topbar-inner {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .topbar-left {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 18px;
+    }
+
+    .pill-live {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(235, 123, 45, 0.22);
+      color: #FFB37D;
+      padding: 2px 10px;
+      border-radius: 999px;
+      font-weight: 600;
+      font-size: 0.76rem;
+    }
+
+    /* Header avec logo bien visible */
+    header {
+      background: rgba(255, 255, 255, 0.98);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--line);
+      position: sticky;
+      top: 0;
+      z-index: 40;
+    }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 12px 0;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      text-decoration: none;
+      color: var(--navy);
+    }
+
+    .brand-logo-box {
+      height: 68px;
+      min-width: 128px;
+      padding: 6px 12px;
+      background: #FFFFFF;
+      border: 1.5px solid #CBD5E1;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 12px rgba(13, 36, 60, 0.06);
+    }
+
+    .brand-logo-box img {
+      max-height: 54px;
+      max-width: 190px;
+      width: auto;
+      height: auto;
+      object-fit: contain;
+      display: block;
+    }
+
+    .brand-name {
+      font-weight: 800;
+      font-size: 1.25rem;
+      letter-spacing: 0.3px;
+      line-height: 1.15;
+    }
+
+    .brand-tag {
+      font-size: 0.8rem;
+      color: var(--muted);
+      font-weight: 600;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 22px;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--ink);
+      font-weight: 600;
+      font-size: 0.92rem;
+      transition: color 0.15s;
+    }
+
+    .nav-links a:hover { color: var(--orange); }
+
+    .nav-cta {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 10px 18px;
+      border-radius: var(--radius-sm);
+      font-weight: 700;
+      font-size: 0.9rem;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.18s ease;
+    }
+
+    .btn-orange {
+      background: var(--orange);
+      color: #fff;
+      box-shadow: 0 6px 16px rgba(235, 123, 45, 0.28);
+    }
+
+    .btn-orange:hover {
+      background: var(--orange-hover);
+      transform: translateY(-1px);
+    }
+
+    .btn-navy {
+      background: var(--navy);
+      color: #fff;
+    }
+
+    .btn-navy:hover { background: var(--navy-deep); }
+
+    .btn-outline {
+      background: #fff;
+      color: var(--navy);
+      border: 1.5px solid var(--line);
+    }
+
+    .btn-outline:hover {
+      border-color: var(--navy);
+      background: #F8FAFC;
+    }
+
+    .btn-wa {
+      background: #16A34A;
+      color: #fff;
+    }
+
+    .btn-wa:hover { background: #15803D; }
+
+    .count-badge {
+      background: var(--navy-deep);
+      color: #fff;
+      font-size: 0.76rem;
+      padding: 2px 8px;
+      border-radius: 999px;
+    }
+
+    /* Hero */
+    .hero {
+      background:
+        radial-gradient(circle at 85% 20%, rgba(235, 123, 45, 0.24), transparent 45%),
+        linear-gradient(135deg, var(--navy-deep) 0%, var(--navy) 58%, var(--navy-mid) 100%);
+      color: #fff;
+      padding: 60px 0 54px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.22fr 0.78fr;
+      gap: 34px;
+      align-items: center;
+    }
+
+    .hero-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      padding: 6px 14px;
+      border-radius: 999px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: #FFB37D;
+      margin-bottom: 18px;
+    }
+
+    .hero h1 {
+      font-size: clamp(2rem, 4vw, 2.95rem);
+      line-height: 1.14;
+      font-weight: 800;
+      margin-bottom: 16px;
+    }
+
+    .hero h1 em {
+      font-style: normal;
+      color: #FFA05C;
+    }
+
+    .hero p {
+      color: #E2E8F0;
+      font-size: 1.03rem;
+      max-width: 600px;
+      margin-bottom: 24px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 30px;
+    }
+
+    .stats-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      max-width: 560px;
+    }
+
+    .stat-box {
+      background: rgba(255, 255, 255, 0.09);
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      border-radius: var(--radius-md);
+      padding: 14px;
+    }
+
+    .stat-num {
+      font-size: 1.45rem;
+      font-weight: 800;
+      color: #FFA05C;
+    }
+
+    .stat-label {
+      font-size: 0.8rem;
+      color: #CBD5E1;
+    }
+
+    /* Carte identité + logo en grand dans le hero */
+    .hero-panel {
+      background: #fff;
+      color: var(--ink);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      box-shadow: var(--shadow-md);
+    }
+
+    .hero-logo-banner {
+      background: #F8FAFC;
+      border: 1.5px solid var(--line);
+      border-radius: var(--radius-md);
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-bottom: 18px;
+    }
+
+    .hero-logo-banner img {
+      max-height: 110px;
+      max-width: 100%;
+      width: auto;
+      height: auto;
+      object-fit: contain;
+      display: block;
+    }
+
+    .hero-logo-caption {
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--navy);
+      letter-spacing: 0.4px;
+      text-transform: uppercase;
+    }
+
+    .hero-panel h2 {
+      font-size: 1.14rem;
+      color: var(--navy);
+      margin-bottom: 6px;
+    }
+
+    .hero-panel .sub {
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-bottom: 14px;
+    }
+
+    .quick-list {
+      list-style: none;
+      display: grid;
+      gap: 10px;
+      margin-bottom: 18px;
+    }
+
+    .quick-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 0.88rem;
+      background: #F8FAFC;
+      padding: 9px 12px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--line);
+    }
+
+    .dot-orange {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--orange);
+      margin-top: 6px;
+      flex-shrink: 0;
+    }
+
+    /* Sections */
+    section.block {
+      padding: 64px 0;
+    }
+
+    .sec-header {
+      margin-bottom: 30px;
+    }
+
+    .sec-tag {
+      display: inline-block;
+      font-size: 0.78rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: var(--orange);
+      margin-bottom: 6px;
+    }
+
+    .sec-title {
+      font-size: clamp(1.5rem, 2.8vw, 2.1rem);
+      color: var(--navy);
+      font-weight: 800;
+    }
+
+    .sec-desc {
+      color: var(--muted);
+      max-width: 660px;
+      margin-top: 6px;
+      font-size: 0.96rem;
+    }
+
+    /* Innovation & Avantages */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+
+    .feat-card {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-md);
+      padding: 22px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .feat-badge {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      background: var(--orange-soft);
+      color: var(--orange);
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 14px;
+      font-size: 1rem;
+    }
+
+    .feat-card h3 {
+      font-size: 1.05rem;
+      color: var(--navy);
+      margin-bottom: 8px;
+    }
+
+    .feat-card p {
+      font-size: 0.89rem;
+      color: var(--muted);
+    }
+
+    /* Catalogue toolbar */
+    .catalog-controls {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      margin-bottom: 24px;
+      background: var(--surface);
+      padding: 14px 18px;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .filter-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .tab-btn {
+      padding: 8px 15px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: #F8FAFC;
+      color: var(--ink);
+      font-weight: 700;
+      font-size: 0.85rem;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .tab-btn:hover { border-color: var(--navy); }
+
+    .tab-btn.active {
+      background: var(--navy);
+      color: #fff;
+      border-color: var(--navy);
+    }
+
+    .search-box {
+      min-width: 240px;
+      flex: 0 1 290px;
+    }
+
+    .search-box input {
+      width: 100%;
+      padding: 9px 14px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      font-size: 0.88rem;
+      font-family: inherit;
+    }
+
+    /* Product grid */
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(265px, 1fr));
+      gap: 22px;
+    }
+
+    .prod-card {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: transform 0.18s ease, box-shadow 0.18s ease;
+    }
+
+    .prod-card:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .prod-img {
+      height: 195px;
+      background: #FFFFFF;
+      border-bottom: 1px solid var(--line);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+    }
+
+    .prod-img img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+    }
+
+    .prod-body {
+      padding: 16px 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+      flex: 1;
+    }
+
+    .prod-cat {
+      font-size: 0.74rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--orange);
+    }
+
+    .prod-title {
+      font-size: 1.06rem;
+      font-weight: 700;
+      color: var(--navy);
+    }
+
+    .prod-desc {
+      font-size: 0.88rem;
+      color: var(--muted);
+      flex: 1;
+    }
+
+    .prod-foot {
+      padding: 0 18px 18px;
+    }
+
+    .prod-foot .btn { width: 100%; }
+
+    /* Process */
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
+    }
+
+    .step-box {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-left: 4px solid var(--orange);
+      border-radius: var(--radius-md);
+      padding: 20px;
+    }
+
+    .step-num {
+      font-size: 0.8rem;
+      font-weight: 800;
+      color: var(--orange);
+      margin-bottom: 6px;
+    }
+
+    .step-box h3 {
+      color: var(--navy);
+      font-size: 1.05rem;
+      margin-bottom: 6px;
+    }
+
+    .step-box p {
+      font-size: 0.89rem;
+      color: var(--muted);
+    }
+
+    /* FAQ */
+    .faq-list {
+      display: grid;
+      gap: 12px;
+      max-width: 880px;
+    }
+
+    details {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-md);
+      padding: 14px 18px;
+    }
+
+    summary {
+      font-weight: 700;
+      color: var(--navy);
+      cursor: pointer;
+      list-style: none;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    details p {
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    /* Drawer Devis */
+    .drawer-bg {
+      position: fixed;
+      inset: 0;
+      background: rgba(13, 36, 60, 0.58);
+      backdrop-filter: blur(3px);
+      display: none;
+      justify-content: flex-end;
+      z-index: 60;
+    }
+
+    .drawer-bg.open { display: flex; }
+
+    .drawer {
+      width: 100%;
+      max-width: 450px;
+      height: 100%;
+      background: #fff;
+      padding: 24px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      box-shadow: -12px 0 36px rgba(0, 0, 0, 0.16);
+    }
+
+    .drawer-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .drawer-head h3 {
+      color: var(--navy);
+      font-size: 1.15rem;
+    }
+
+    .btn-close {
+      width: 34px;
+      height: 34px;
+      border-radius: 8px;
+      border: 1px solid var(--line);
+      background: #F8FAFC;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .quote-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 10px 12px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-sm);
+      background: #F8FAFC;
+      font-size: 0.88rem;
+    }
+
+    .qty-ctrl {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+    }
+
+    .qty-ctrl button {
+      width: 26px;
+      height: 26px;
+      border-radius: 6px;
+      border: 1px solid var(--line);
+      background: #fff;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .input-group {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .input-group label {
+      font-size: 0.84rem;
+      font-weight: 700;
+      color: var(--navy);
+    }
+
+    .input-group input,
+    .input-group textarea {
+      padding: 9px 12px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--line);
+      font-family: inherit;
+      font-size: 0.9rem;
+    }
+
+    .drawer-actions {
+      display: grid;
+      gap: 9px;
+      margin-top: 4px;
+    }
+
+    .feedback {
+      font-size: 0.84rem;
+      font-weight: 700;
+      color: #15803D;
+      min-height: 20px;
+    }
+
+    /* Footer */
+    footer {
+      background: var(--navy-deep);
+      color: #CBD5E1;
+      padding: 36px 0 24px;
+      font-size: 0.88rem;
+    }
+
+    .footer-inner {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding-bottom: 18px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      margin-bottom: 16px;
+    }
+
+    .footer-copy {
+      font-size: 0.8rem;
+      color: #94A3B8;
+      text-align: center;
+    }
+
+    @media (max-width: 900px) {
+      .hero-grid { grid-template-columns: 1fr; }
+      .nav-links { display: none; }
+    }
+
+    @media (max-width: 560px) {
+      .stats-row { grid-template-columns: 1fr; }
+      .brand-tag { display: none; }
+      .brand-logo-box {
+        height: 54px;
+        min-width: 96px;
+        padding: 4px 8px;
+      }
+      .brand-logo-box img {
+        max-height: 44px;
+        max-width: 140px;
+      }
+    }
   </style>
 </head>
 <body>
+  <div class="topbar">
+    <div class="container topbar-inner">
+      <div class="topbar-left">
+        <span>Tél / WhatsApp : <strong>07 30 65 90 63</strong></span>
+        <span>E-mail : <strong>contact.gipm.maroc@gmail.com</strong></span>
+      </div>
+      <span class="pill-live">Devis B2B &amp; Mesures sur demande</span>
+    </div>
+  </div>
+
   <header>
-    <div class="nav-wrap">
+    <div class="container nav-inner">
       <a class="brand" href="#">
-        <img id="siteLogo" src="logo.png" alt="Logo G.I.P.M." />
-        <span>G.I.P.M. – Global Industrie &amp; Packaging Maroc</span>
+        <span class="brand-logo-box">
+          <img id="headerLogo" src="logo.png" alt="Logo G.I.P.M. Global Industrie &amp; Packaging Maroc" />
+        </span>
+        <div>
+          <div class="brand-name">G.I.P.M.</div>
+          <div class="brand-tag">Global Industrie &amp; Packaging Maroc</div>
+        </div>
       </a>
-      <div class="nav-btns">
-        <a class="btn btn-outline" href="#catalogue">Catalogue</a>
-        <button class="btn btn-orange" id="btnOpenQuote" type="button">Devis (<span id="badgeCount">0</span>)</button>
+
+      <nav class="nav-links">
+        <a href="#avantages">Solutions</a>
+        <a href="#catalogue">Catalogue</a>
+        <a href="#process">Fonctionnement</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+
+      <div class="nav-cta">
+        <button class="btn btn-orange" id="openQuoteBtn" type="button">
+          Devis <span class="count-badge" id="quoteBadge">0</span>
+        </button>
       </div>
     </div>
   </header>
 
   <section class="hero">
-    <div class="hero-inner">
-      <h1>Emballage &amp; <span>Packaging Industriel</span> au Maroc</h1>
-      <p>Cartons, films étirables, films à bulles, feuillards, housses thermiques et palettes pour vos besoins professionnels.</p>
-      <div style="display:flex;flex-wrap:wrap;gap:10px;">
-        <a class="btn btn-orange" href="#catalogue">Voir les produits</a>
-        <button class="btn btn-green" id="btnDirectWa" type="button">Devis rapide WhatsApp</button>
+    <div class="container hero-grid">
+      <div>
+        <div class="hero-kicker">Packaging Industriel &amp; Logistique au Maroc</div>
+        <h1>Sécurisez vos expéditions avec un <em>packaging industriel</em> fiable</h1>
+        <p>
+          G.I.P.M. accompagne les entreprises, entrepôts et acteurs industriels avec une gamme complète de cartons, films de protection, cerclage et palettes adaptés à vos contraintes terrain.
+        </p>
+        <div class="hero-actions">
+          <a class="btn btn-orange" href="#catalogue">Explorer le catalogue</a>
+          <button class="btn btn-wa" id="heroWhatsapp" type="button">Devis direct WhatsApp</button>
+          <button class="btn btn-outline" id="heroOpenDevis" type="button">Composer mon devis</button>
+        </div>
+
+        <div class="stats-row">
+          <div class="stat-box">
+            <div class="stat-num">10+</div>
+            <div class="stat-label">Références packaging dédiées pros</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-num">Sur-mesure</div>
+            <div class="stat-label">Dimensions &amp; spécifications au choix</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-num">B2B Direct</div>
+            <div class="stat-label">Réponse rapide WhatsApp &amp; E-mail</div>
+          </div>
+        </div>
+      </div>
+
+      <aside class="hero-panel">
+        <div class="hero-logo-banner">
+          <img id="heroLogo" src="logo.png" alt="Logo officiel G.I.P.M. Global Industrie &amp; Packaging Maroc" />
+          <span class="hero-logo-caption">Global Industrie &amp; Packaging Maroc</span>
+        </div>
+        <h2>Configuration Devis Express</h2>
+        <p class="sub">Sélectionnez vos produits dans le catalogue et précisez vos dimensions en un clic.</p>
+        <ul class="quick-list">
+          <li>
+            <span class="dot-orange"></span>
+            <div><strong>Cartons &amp; angles :</strong> caisses américaines, double cannelure et cornières de protection.</div>
+          </li>
+          <li>
+            <span class="dot-orange"></span>
+            <div><strong>Films &amp; barrières :</strong> film étirable, film à bulles et housses thermiques palettes.</div>
+          </li>
+          <li>
+            <span class="dot-orange"></span>
+            <div><strong>Cerclage &amp; supports :</strong> feuillard PET vert, ruban adhésif, palettes bois &amp; plastique.</div>
+          </li>
+        </ul>
+        <button class="btn btn-navy" style="width:100%;" id="panelOpenDevis" type="button">
+          Ouvrir le panier de devis
+        </button>
+      </aside>
+    </div>
+  </section>
+
+  <section class="block" id="avantages">
+    <div class="container">
+      <div class="sec-header">
+        <span class="sec-tag">Approche &amp; Innovation</span>
+        <h2 class="sec-title">Conçu pour la performance de vos flux logistiques</h2>
+        <p class="sec-desc">
+          Un bon emballage réduit la casse, optimise le palettisage et accélère la préparation de commandes.
+        </p>
+      </div>
+
+      <div class="features-grid">
+        <article class="feat-card">
+          <div class="feat-badge">01</div>
+          <h3>Protection multi-couches</h3>
+          <p>Associez caisses renforcées, cornières et films de maintien pour limiter les chocs et vibrations durant le transport.</p>
+        </article>
+        <article class="feat-card">
+          <div class="feat-badge">02</div>
+          <h3>Adaptation aux dimensions</h3>
+          <p>Indiquez vos cotes, épaisseurs ou formats souhaités directement dans votre demande de devis pour une offre ciblée.</p>
+        </article>
+        <article class="feat-card">
+          <div class="feat-badge">03</div>
+          <h3>Barrière thermique &amp; poussière</h3>
+          <p>Les housses thermiques et films techniques protègent vos charges exposées aux variations d'environnement.</p>
+        </article>
+        <article class="feat-card">
+          <div class="feat-badge">04</div>
+          <h3>Commande simplifiée B2B</h3>
+          <p>Préparez votre liste en quelques secondes et envoyez-la instantanément sur WhatsApp ou par e-mail.</p>
+        </article>
       </div>
     </div>
   </section>
 
-  <main id="catalogue">
-    <div class="top-bar">
-      <h2>Nos Produits Packaging</h2>
-      <div class="tabs" id="tabBar">
-        <button class="tab active" data-cat="all" type="button">Tous</button>
-        <button class="tab" data-cat="Cartons" type="button">Cartons</button>
-        <button class="tab" data-cat="Films &amp; Protection" type="button">Films &amp; Protection</button>
-        <button class="tab" data-cat="Cerclage &amp; Adhésifs" type="button">Cerclage &amp; Adhésifs</button>
-        <button class="tab" data-cat="Palettes" type="button">Palettes</button>
+  <section class="block" id="catalogue" style="padding-top: 10px;">
+    <div class="container">
+      <div class="sec-header">
+        <span class="sec-tag">Catalogue Produits</span>
+        <h2 class="sec-title">Gamme complète d'emballage industriel</h2>
+        <p class="sec-desc">Filtrez par famille ou recherchez un article, puis ajoutez-le à votre demande de devis.</p>
       </div>
-    </div>
-    <div class="grid" id="grid"></div>
-  </main>
 
-  <div class="modal-bg" id="modalBg">
-    <div class="modal-panel">
-      <div class="modal-head">
-        <h3>Demande de devis</h3>
-        <button class="x-btn" id="btnCloseQuote" type="button">✕</button>
+      <div class="catalog-controls">
+        <div class="filter-tabs" id="categoryTabs">
+          <button class="tab-btn active" data-cat="all" type="button">Tous les produits</button>
+          <button class="tab-btn" data-cat="Cartons" type="button">Cartons</button>
+          <button class="tab-btn" data-cat="Films &amp; Protection" type="button">Films &amp; Protection</button>
+          <button class="tab-btn" data-cat="Cerclage &amp; Adhésifs" type="button">Cerclage &amp; Adhésifs</button>
+          <button class="tab-btn" data-cat="Palettes" type="button">Palettes</button>
+        </div>
+
+        <div class="search-box">
+          <input id="searchInput" type="search" placeholder="Rechercher un produit (ex. palette, film, carton)..." />
+        </div>
       </div>
-      <div id="quoteList"></div>
-      <div class="field">
-        <label for="inpCompany">Entreprise / Nom</label>
-        <input id="inpCompany" type="text" placeholder="Ex. Société Atlas" />
-      </div>
-      <div class="field">
-        <label for="inpMeasures">Mesures / Dimensions souhaitées (optionnel)</label>
-        <input id="inpMeasures" type="text" placeholder="Ex. 60x40x40 cm, 23 microns, palette 80x120..." />
-      </div>
-      <div class="field">
-        <label for="inpNotes">Précisions / Ville (optionnel)</label>
-        <textarea id="inpNotes" rows="2" placeholder="Quantités, lieu de livraison..."></textarea>
-      </div>
-      <button class="btn btn-green" id="btnSendWa" type="button">Envoyer sur WhatsApp</button>
-      <button class="btn btn-orange" id="btnSendMail" type="button">Envoyer par E-mail</button>
-      <button class="btn btn-outline" id="btnCopy" type="button">Copier le texte</button>
-      <div class="msg" id="msgBox"></div>
+
+      <div class="products-grid" id="catalogGrid"></div>
     </div>
+  </section>
+
+  <section class="block" id="process">
+    <div class="container">
+      <div class="sec-header">
+        <span class="sec-tag">Comment ça marche</span>
+        <h2 class="sec-title">Votre demande de devis en 3 étapes</h2>
+      </div>
+
+      <div class="steps-grid">
+        <div class="step-box">
+          <div class="step-num">ÉTAPE 01</div>
+          <h3>Sélectionnez vos articles</h3>
+          <p>Ajoutez les références nécessaires depuis le catalogue et ajustez les quantités dans le tiroir de devis.</p>
+        </div>
+        <div class="step-box">
+          <div class="step-num">ÉTAPE 02</div>
+          <h3>Précisez vos mesures</h3>
+          <p>Renseignez vos dimensions, épaisseurs ou contraintes de livraison dans le champ dédié aux mesures.</p>
+        </div>
+        <div class="step-box">
+          <div class="step-num">ÉTAPE 03</div>
+          <h3>Transmettez en un clic</h3>
+          <p>Envoyez votre récapitulatif directement par WhatsApp ou e-mail à l'équipe G.I.P.M.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="faq" style="padding-top: 10px;">
+    <div class="container">
+      <div class="sec-header">
+        <span class="sec-tag">Questions fréquentes</span>
+        <h2 class="sec-title">Informations utiles pour vos commandes</h2>
+      </div>
+
+      <div class="faq-list">
+        <details>
+          <summary>Puis-je demander des dimensions ou mesures spécifiques ?</summary>
+          <p>Oui, le formulaire de devis inclut un champ dédié « Dimensions / Mesures souhaitées » pour préciser vos formats, épaisseurs ou besoins particuliers.</p>
+        </details>
+        <details>
+          <summary>Comment obtenir un tarif ou une disponibilité rapidement ?</summary>
+          <p>Ajoutez vos produits au devis, remplissez vos coordonnées et cliquez sur « Envoyer sur WhatsApp » ou « Envoyer par E-mail » pour transmettre votre demande.</p>
+        </details>
+        <details>
+          <summary>Proposez-vous à la fois des solutions de calage, cerclage et palettisation ?</summary>
+          <p>Oui, le catalogue couvre les cartons, les films de protection/thermiques, le feuillard et l'adhésif ainsi que les palettes bois et plastique.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <div class="drawer-bg" id="quoteDrawerBg">
+    <aside class="drawer" role="dialog" aria-label="Demande de devis">
+      <div class="drawer-head">
+        <h3>Votre demande de devis</h3>
+        <button class="btn-close" id="closeQuoteBtn" type="button" aria-label="Fermer">✕</button>
+      </div>
+
+      <div id="quoteItemsBox"></div>
+
+      <div class="input-group">
+        <label for="fCompany">Entreprise / Nom</label>
+        <input id="fCompany" type="text" placeholder="Ex. Société Atlas Logistique" />
+      </div>
+
+      <div class="input-group">
+        <label for="fMeasures">Dimensions / Mesures souhaitées (optionnel)</label>
+        <input id="fMeasures" type="text" placeholder="Ex. Carton 60x40x40 cm, Film 23µ, Palette 80x120..." />
+      </div>
+
+      <div class="input-group">
+        <label for="fNotes">Quantités complémentaires / Lieu de livraison (optionnel)</label>
+        <textarea id="fNotes" rows="2" placeholder="Ville, délais, précisions..."></textarea>
+      </div>
+
+      <div class="drawer-actions">
+        <button class="btn btn-wa" id="sendWhatsappBtn" type="button">Envoyer sur WhatsApp</button>
+        <button class="btn btn-orange" id="sendEmailBtn" type="button">Envoyer par E-mail</button>
+        <button class="btn btn-outline" id="copySummaryBtn" type="button">Copier le récapitulatif</button>
+      </div>
+
+      <div class="feedback" id="feedbackText"></div>
+    </aside>
   </div>
 
   <footer>
-    G.I.P.M. – Global Industrie &amp; Packaging Maroc · Tél / WhatsApp : 07 30 65 90 63 · contact.gipm.maroc@gmail.com
+    <div class="container">
+      <div class="footer-inner">
+        <div>
+          <strong style="color:#fff;font-size:1rem;">G.I.P.M. – Global Industrie &amp; Packaging Maroc</strong><br />
+          <span>Solutions d'emballage &amp; logistique industrielle</span>
+        </div>
+        <div>
+          <span>Tél / WhatsApp : <strong>07 30 65 90 63</strong></span> ·
+          <span>E-mail : <strong>contact.gipm.maroc@gmail.com</strong></span>
+        </div>
+      </div>
+      <div class="footer-copy">
+        © <span id="yearSpan"></span> G.I.P.M. – Global Industrie &amp; Packaging Maroc. Tous droits réservés.
+      </div>
+    </div>
   </footer>
 
   <script>
-    const WA_PHONE = "212730659063";
-    const EMAIL_TO = "contact.gipm.maroc@gmail.com";
+    const WA_NUMBER = "212730659063";
+    const CONTACT_EMAIL = "contact.gipm.maroc@gmail.com";
 
-    const ITEMS = [
-      { id: "caisse", name: "Caisse américaine en carton", cat: "Cartons", img: "caisse-carton.jpg", desc: "Caisse en carton ondulé pour conditionnement et expédition." },
-      { id: "double", name: "Grand carton double cannelure", cat: "Cartons", img: "carton-double.jpg", desc: "Carton renforcé pour charges lourdes et transport." },
-      { id: "corniere", name: "Cornières de protection en carton", cat: "Cartons", img: "cornieres-carton.png", desc: "Protection des angles de palettes et colis." },
-      { id: "etirable", name: "Film étirable industriel", cat: "Films & Protection", img: "film-etirable.jpg", desc: "Maintien et stabilisation des palettes." },
-      { id: "bulle", name: "Rouleau de film à bulles", cat: "Films & Protection", img: "film-bulle.jpg", desc: "Protection antichoc pour articles fragiles." },
-      { id: "housse", name: "Housse thermique palette", cat: "Films & Protection", img: "housse-thermique.jpg", desc: "Protection contre variations thermiques et poussière." },
-      { id: "feuillard", name: "Feuillard PET vert de cerclage", cat: "Cerclage & Adhésifs", img: "feuillard-pet.jpeg", desc: "Cerclage résistant pour charges et palettes." },
-      { id: "adhesif", name: "Ruban adhésif d'emballage", cat: "Cerclage & Adhésifs", img: "ruban-adhesif.png", desc: "Fermeture fiable des cartons." },
-      { id: "euro", name: "Palette bois type Europe", cat: "Palettes", img: "palette-euro.png", desc: "Palette bois pour stockage et manutention." },
-      { id: "plastique", name: "Palette plastique industrielle", cat: "Palettes", img: "palette-plastique.png", desc: "Palette plastique légère et résistante." }
+    const CATALOG = [
+      {
+        id: "caisse-carton",
+        name: "Caisse américaine en carton",
+        category: "Cartons",
+        img: "caisse-carton.jpg",
+        desc: "Caisse carton ondulé polyvalente pour expédition, stockage et préparation de commandes."
+      },
+      {
+        id: "carton-double",
+        name: "Grand carton double cannelure",
+        category: "Cartons",
+        img: "carton-double.jpg",
+        desc: "Renfort double cannelure conçu pour charges lourdes, pièces et transport exigeant."
+      },
+      {
+        id: "cornieres-carton",
+        name: "Cornières de protection en carton",
+        category: "Cartons",
+        img: "cornieres-carton.png",
+        desc: "Sécurise les arêtes et angles des charges palettisées face aux chocs et au cerclage."
+      },
+      {
+        id: "film-etirable",
+        name: "Film étirable industriel",
+        category: "Films & Protection",
+        img: "film-etirable.jpg",
+        desc: "Stabilisation homogène des charges sur palette pour entrepôt et transport."
+      },
+      {
+        id: "film-bulle",
+        name: "Rouleau de film à bulles",
+        category: "Films & Protection",
+        img: "film-bulle.jpg",
+        desc: "Absorption des chocs et rayures pour produits sensibles ou fragiles."
+      },
+      {
+        id: "housse-thermique",
+        name: "Housse thermique de protection palette",
+        category: "Films & Protection",
+        img: "housse-thermique.jpg",
+        desc: "Protection enveloppante contre variations thermiques, poussière et humidité."
+      },
+      {
+        id: "feuillard-pet",
+        name: "Feuillard PET vert de cerclage",
+        category: "Cerclage & Adhésifs",
+        img: "feuillard-pet.jpeg",
+        desc: "Cerclage haute résistance à la traction pour maintenir les charges lourdes."
+      },
+      {
+        id: "ruban-adhesif",
+        name: "Ruban adhésif d'emballage",
+        category: "Cerclage & Adhésifs",
+        img: "ruban-adhesif.png",
+        desc: "Fermeture nette et durable des caisses carton en usage quotidien."
+      },
+      {
+        id: "palette-euro",
+        name: "Palette bois type Europe",
+        category: "Palettes",
+        img: "palette-euro.png",
+        desc: "Palette bois robuste adaptée à la manutention, aux chariots et au stockage."
+      },
+      {
+        id: "palette-plastique",
+        name: "Palette plastique industrielle",
+        category: "Palettes",
+        img: "palette-plastique.png",
+        desc: "Palette légère, résistante à l'humidité et facile à nettoyer en flux logistique."
+      }
     ];
 
-    const fallbackSvg = "data:image/svg+xml;utf8," + encodeURIComponent(
-      '<svg xmlns="http://www.w3.org/2000/svg" width="220" height="140" viewBox="0 0 220 140"><rect width="220" height="140" fill="#EEF2F6"/><rect x="75" y="30" width="70" height="70" rx="10" fill="#18426B"/><polygon points="110,30 145,48 110,66 75,48" fill="#EB7B2D"/><text x="110" y="122" font-family="Arial" font-size="13" font-weight="bold" fill="#18426B" text-anchor="middle">G.I.P.M. PACKAGING</text></svg>'
+    const fallbackGraphic = "data:image/svg+xml;utf8," + encodeURIComponent(
+      '<svg xmlns="http://www.w3.org/2000/svg" width="200" height="140" viewBox="0 0 200 140"><rect width="200" height="140" rx="12" fill="#F1F5F9"/><polygon points="100,24 142,46 100,68 58,46" fill="#EB7B2D"/><polygon points="58,52 96,72 96,112 58,92" fill="#18426B"/><polygon points="142,52 104,72 104,112 142,92" fill="#2A659E"/></svg>'
     );
 
-    const logoEl = document.getElementById("siteLogo");
-    logoEl.addEventListener("error", function () {
-      if (this.dataset.done) return;
-      this.dataset.done = "1";
-      this.src = fallbackSvg;
-    });
+    const faviconSvg = "data:image/svg+xml;utf8," + encodeURIComponent(
+      '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="14" fill="#18426B"/><polygon points="32,12 50,22 32,32 14,22" fill="#EB7B2D"/><polygon points="14,26 30,35 30,52 14,43" fill="#FFFFFF"/><polygon points="50,26 34,35 34,52 50,43" fill="#FFA05C"/></svg>'
+    );
 
-    let currentCat = "all";
-    const cart = {};
+    function attachLogoFallback(imgEl) {
+      if (!imgEl) return;
+      imgEl.addEventListener("error", function () {
+        if (this.dataset.fb) return;
+        this.dataset.fb = "1";
+        this.src = fallbackGraphic;
+      });
+    }
 
-    function drawGrid() {
-      const list = currentCat === "all" ? ITEMS : ITEMS.filter(function (i) { return i.cat === currentCat; });
-      const grid = document.getElementById("grid");
-      grid.innerHTML = "";
+    attachLogoFallback(document.getElementById("headerLogo"));
+    attachLogoFallback(document.getElementById("heroLogo"));
 
-      list.forEach(function (item) {
-        const card = document.createElement("div");
-        card.className = "card";
+    // Vérifie que logo.png existe bien pour l'icône d'onglet, sinon met l'icône de secours
+    const favTest = new Image();
+    favTest.src = "logo.png";
+    favTest.onerror = function () {
+      const fav = document.getElementById("pageFavicon");
+      if (fav) fav.href = faviconSvg;
+    };
 
-        const picBox = document.createElement("div");
-        picBox.className = "pic-box";
+    let selectedCat = "all";
+    let searchTerm = "";
+    const quoteCart = {};
+
+    const catalogGrid = document.getElementById("catalogGrid");
+    const categoryTabs = document.getElementById("categoryTabs");
+    const searchInput = document.getElementById("searchInput");
+    const drawerBg = document.getElementById("quoteDrawerBg");
+    const quoteItemsBox = document.getElementById("quoteItemsBox");
+    const quoteBadge = document.getElementById("quoteBadge");
+    const feedbackText = document.getElementById("feedbackText");
+
+    document.getElementById("yearSpan").textContent = new Date().getFullYear();
+
+    function renderCatalog() {
+      const q = searchTerm.trim().toLowerCase();
+      const filtered = CATALOG.filter(function (item) {
+        const matchCat = selectedCat === "all" || item.category === selectedCat;
+        const matchText = !q ||
+          item.name.toLowerCase().includes(q) ||
+          item.category.toLowerCase().includes(q) ||
+          item.desc.toLowerCase().includes(q);
+        return matchCat && matchText;
+      });
+
+      catalogGrid.innerHTML = "";
+
+      if (!filtered.length) {
+        catalogGrid.innerHTML = '<p style="color:#475569;grid-column:1/-1;">Aucun produit ne correspond à votre recherche.</p>';
+        return;
+      }
+
+      filtered.forEach(function (item) {
+        const card = document.createElement("article");
+        card.className = "prod-card";
+
+        const imgWrap = document.createElement("div");
+        imgWrap.className = "prod-img";
         const img = document.createElement("img");
         img.src = item.img;
         img.alt = item.name;
+        img.loading = "lazy";
         img.addEventListener("error", function () {
-          if (this.dataset.done) return;
-          this.dataset.done = "1";
-          this.src = fallbackSvg;
+          if (this.dataset.fb) return;
+          this.dataset.fb = "1";
+          this.src = fallbackGraphic;
         });
-        picBox.appendChild(img);
+        imgWrap.appendChild(img);
 
         const body = document.createElement("div");
-        body.className = "card-body";
-        body.innerHTML = '<div class="cat">' + item.cat + '</div><div class="card-title">' + item.name + '</div><div class="card-desc">' + item.desc + '</div>';
+        body.className = "prod-body";
+        body.innerHTML =
+          '<span class="prod-cat">' + item.category + '</span>' +
+          '<h3 class="prod-title">' + item.name + '</h3>' +
+          '<p class="prod-desc">' + item.desc + '</p>';
 
         const foot = document.createElement("div");
-        foot.className = "card-foot";
+        foot.className = "prod-foot";
         const addBtn = document.createElement("button");
         addBtn.className = "btn btn-orange";
         addBtn.type = "button";
         addBtn.textContent = "Ajouter au devis";
         addBtn.addEventListener("click", function () {
-          cart[item.id] = (cart[item.id] || 0) + 1;
-          refreshCart();
-          openModal();
+          addItem(item.id);
         });
         foot.appendChild(addBtn);
 
-        card.appendChild(picBox);
+        card.appendChild(imgWrap);
         card.appendChild(body);
         card.appendChild(foot);
-        grid.appendChild(card);
+        catalogGrid.appendChild(card);
       });
     }
 
-    function changeCount(id, diff) {
-      const next = (cart[id] || 0) + diff;
-      if (next <= 0) delete cart[id];
-      else cart[id] = next;
-      refreshCart();
+    function addItem(id) {
+      quoteCart[id] = (quoteCart[id] || 0) + 1;
+      syncQuote();
+      openDrawer();
     }
 
-    function refreshCart() {
-      const entries = Object.entries(cart);
-      const total = entries.reduce(function (sum, pair) { return sum + pair[1]; }, 0);
-      document.getElementById("badgeCount").textContent = total;
+    function updateQty(id, delta) {
+      const next = (quoteCart[id] || 0) + delta;
+      if (next <= 0) delete quoteCart[id];
+      else quoteCart[id] = next;
+      syncQuote();
+    }
 
-      const listEl = document.getElementById("quoteList");
+    function syncQuote() {
+      const entries = Object.entries(quoteCart);
+      const total = entries.reduce(function (acc, pair) { return acc + pair[1]; }, 0);
+      quoteBadge.textContent = total;
+
       if (!entries.length) {
-        listEl.innerHTML = '<p style="color:#64748B;font-size:0.88rem;">Aucun produit ajouté.</p>';
+        quoteItemsBox.innerHTML = '<p style="color:#64748B;font-size:0.88rem;">Aucun article sélectionné pour le moment.</p>';
         return;
       }
 
-      listEl.innerHTML = "";
+      quoteItemsBox.innerHTML = "";
       entries.forEach(function (pair) {
-        const id = pair[0];
-        const qty = pair[1];
-        const prod = ITEMS.find(function (x) { return x.id === id; });
+        const prod = CATALOG.find(function (p) { return p.id === pair[0]; });
         if (!prod) return;
 
         const row = document.createElement("div");
-        row.className = "item-row";
+        row.className = "quote-row";
 
-        const info = document.createElement("div");
-        info.innerHTML = "<strong>" + prod.name + "</strong>";
+        const label = document.createElement("div");
+        label.innerHTML = '<strong>' + prod.name + '</strong><br><span style="color:#64748B;font-size:0.78rem;">' + prod.category + '</span>';
 
-        const qtyBox = document.createElement("div");
-        qtyBox.className = "qty";
+        const ctrl = document.createElement("div");
+        ctrl.className = "qty-ctrl";
 
         const minus = document.createElement("button");
         minus.type = "button";
         minus.textContent = "−";
-        minus.addEventListener("click", function () { changeCount(id, -1); });
+        minus.addEventListener("click", function () { updateQty(prod.id, -1); });
 
-        const num = document.createElement("span");
-        num.textContent = qty;
+        const val = document.createElement("span");
+        val.textContent = pair[1];
 
         const plus = document.createElement("button");
         plus.type = "button";
         plus.textContent = "+";
-        plus.addEventListener("click", function () { changeCount(id, 1); });
+        plus.addEventListener("click", function () { updateQty(prod.id, 1); });
 
-        qtyBox.appendChild(minus);
-        qtyBox.appendChild(num);
-        qtyBox.appendChild(plus);
-        row.appendChild(info);
-        row.appendChild(qtyBox);
-        listEl.appendChild(row);
+        ctrl.appendChild(minus);
+        ctrl.appendChild(val);
+        ctrl.appendChild(plus);
+        row.appendChild(label);
+        row.appendChild(ctrl);
+        quoteItemsBox.appendChild(row);
       });
     }
 
-    function makeMessage() {
-      const company = document.getElementById("inpCompany").value.trim();
-      const measures = document.getElementById("inpMeasures").value.trim();
-      const notes = document.getElementById("inpNotes").value.trim();
-      const lines = ["Bonjour G.I.P.M., je souhaite un devis packaging :"];
+    function composeQuoteMessage() {
+      const company = document.getElementById("fCompany").value.trim();
+      const measures = document.getElementById("fMeasures").value.trim();
+      const notes = document.getElementById("fNotes").value.trim();
+      const entries = Object.entries(quoteCart);
 
+      const lines = ["Bonjour G.I.P.M., je souhaite un devis packaging :"];
       if (company) lines.push("• Entreprise / Nom : " + company);
 
-      const entries = Object.entries(cart);
       if (entries.length) {
         lines.push("• Produits :");
         entries.forEach(function (pair) {
-          const prod = ITEMS.find(function (x) { return x.id === pair[0]; });
+          const prod = CATALOG.find(function (p) { return p.id === pair[0]; });
           if (prod) lines.push("  - " + prod.name + " (x" + pair[1] + ")");
         });
       }
 
-      if (measures) lines.push("• Mesures / Dimensions : " + measures);
-      if (notes) lines.push("• Notes / Ville : " + notes);
+      if (measures) lines.push("• Dimensions / Mesures : " + measures);
+      if (notes) lines.push("• Précisions / Livraison : " + notes);
+
       return lines.join("\n");
     }
 
-    function openModal() {
-      document.getElementById("msgBox").textContent = "";
-      document.getElementById("modalBg").classList.add("show");
+    function openDrawer() {
+      feedbackText.textContent = "";
+      drawerBg.classList.add("open");
     }
 
-    function closeModal() {
-      document.getElementById("modalBg").classList.remove("show");
+    function closeDrawer() {
+      drawerBg.classList.remove("open");
     }
 
-    document.querySelectorAll("#tabBar .tab").forEach(function (btn) {
-      btn.addEventListener("click", function () {
-        document.querySelectorAll("#tabBar .tab").forEach(function (b) { b.classList.remove("active"); });
-        btn.classList.add("active");
-        currentCat = btn.getAttribute("data-cat");
-        drawGrid();
-      });
+    categoryTabs.addEventListener("click", function (e) {
+      const btn = e.target.closest(".tab-btn");
+      if (!btn) return;
+      categoryTabs.querySelectorAll(".tab-btn").forEach(function (b) { b.classList.remove("active"); });
+      btn.classList.add("active");
+      selectedCat = btn.getAttribute("data-cat");
+      renderCatalog();
     });
 
-    document.getElementById("btnOpenQuote").addEventListener("click", function () {
-      refreshCart();
-      openModal();
-    });
-    document.getElementById("btnCloseQuote").addEventListener("click", closeModal);
-    document.getElementById("modalBg").addEventListener("click", function (e) {
-      if (e.target === this) closeModal();
+    searchInput.addEventListener("input", function () {
+      searchTerm = this.value;
+      renderCatalog();
     });
 
-    document.getElementById("btnDirectWa").addEventListener("click", function () {
-      window.open("https://wa.me/" + WA_PHONE + "?text=" + encodeURIComponent("Bonjour G.I.P.M., je souhaite un devis packaging."), "_blank");
+    document.getElementById("openQuoteBtn").addEventListener("click", function () {
+      syncQuote();
+      openDrawer();
+    });
+    document.getElementById("heroOpenDevis").addEventListener("click", function () {
+      syncQuote();
+      openDrawer();
+    });
+    document.getElementById("panelOpenDevis").addEventListener("click", function () {
+      syncQuote();
+      openDrawer();
+    });
+    document.getElementById("closeQuoteBtn").addEventListener("click", closeDrawer);
+    drawerBg.addEventListener("click", function (e) {
+      if (e.target === drawerBg) closeDrawer();
     });
 
-    document.getElementById("btnSendWa").addEventListener("click", function () {
-      window.open("https://wa.me/" + WA_PHONE + "?text=" + encodeURIComponent(makeMessage()), "_blank");
+    document.getElementById("heroWhatsapp").addEventListener("click", function () {
+      const msg = encodeURIComponent("Bonjour G.I.P.M., je souhaite demander un devis packaging.");
+      window.open("https://wa.me/" + WA_NUMBER + "?text=" + msg, "_blank", "noopener");
     });
 
-    document.getElementById("btnSendMail").addEventListener("click", function () {
-      window.location.href = "mailto:" + EMAIL_TO + "?subject=" + encodeURIComponent("Demande de devis – G.I.P.M.") + "&body=" + encodeURIComponent(makeMessage());
+    document.getElementById("sendWhatsappBtn").addEventListener("click", function () {
+      const msg = encodeURIComponent(composeQuoteMessage());
+      window.open("https://wa.me/" + WA_NUMBER + "?text=" + msg, "_blank", "noopener");
     });
 
-    document.getElementById("btnCopy").addEventListener("click", function () {
-      const text = makeMessage();
-      if (navigator.clipboard && navigator.clipboard.writeText) {
-        navigator.clipboard.writeText(text).then(function () {
-          document.getElementById("msgBox").textContent = "Texte copié !";
-        }).catch(function () {
-          document.getElementById("msgBox").textContent = "Copie impossible, sélectionnez le texte.";
-        });
+    document.getElementById("sendEmailBtn").addEventListener("click", function () {
+      const subj = encodeURIComponent("Demande de devis – G.I.P.M. Packaging");
+      const body = encodeURIComponent(composeQuoteMessage());
+      window.location.href = "mailto:" + CONTACT_EMAIL + "?subject=" + subj + "&body=" + body;
+    });
+
+    document.getElementById("copySummaryBtn").addEventListener("click", async function () {
+      const text = composeQuoteMessage();
+      try {
+        await navigator.clipboard.writeText(text);
+        feedbackText.textContent = "Récapitulatif copié dans le presse-papiers.";
+      } catch {
+        feedbackText.textContent = "Sélectionnez et copiez le texte manuellement.";
       }
     });
 
-    drawGrid();
-    refreshCart();
+    renderCatalog();
+    syncQuote();
   </script>
 </body>
 </html>
